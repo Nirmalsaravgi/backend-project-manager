@@ -35,7 +35,8 @@ userSchema.pre("save", function(next){
     next();
 });
 
-userSchema.static('matchPassword', async function(email, password){
+
+userSchema.static('matchPassword', async function(email, password) {
     const user = await this.findOne({email});
     if (!user) throw new Error('User not Found');
 
@@ -43,13 +44,12 @@ userSchema.static('matchPassword', async function(email, password){
     const hashedPassword = user.password;
 
     const userProvidedHash = createHmac("sha256", salt)
-    .update(password)
-    .digest("hex");
+        .update(password)
+        .digest("hex");
 
-    if(hashedPassword !== userProvidedHash) 
+    if (hashedPassword !== userProvidedHash) 
         throw new Error('Incorrect Password');
 
-    // return {...user._doc, password: undefined, salt: undefined};
     const token = createTokenForUser(user);
     return token;
 });
