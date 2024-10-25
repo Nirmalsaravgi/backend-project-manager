@@ -11,11 +11,13 @@ const app = express();
 const PORT = 8000;
 
 // // app.use(cors({ origin: 'http://127.0.0.1:4200' }));
-// app.use(cors())
+// app.use(cors());
 const corsOptions = {
-    origin: 'http://127.0.0.1:4200',  // Allow requests from this specific origin
-    credentials: true,  // Allow cookies to be sent
-};
+    origin: "http://127.0.0.1:4200", // Allow requests from this specific origin
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["content-type", "Authorization"],
+    credentials: true, // Allow cookies to be sent
+  };
 
 
 mongoose.connect('mongodb://localhost:27017/projmanag').then(e => console.log('MongoDb connected'));
