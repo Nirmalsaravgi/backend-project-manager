@@ -16,7 +16,16 @@ function validateToken(token) {
     return payload;
 };
 
+function decodeToken(token) {
+    try {
+        return JWT.verify(token, secret);
+    } catch (error) {
+        throw new Error('Invalid token');
+    }
+}
+
 module.exports = {
     createTokenForUser,
-    validateToken
+    validateToken,
+    decodeToken
 };
