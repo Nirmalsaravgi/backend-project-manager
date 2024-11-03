@@ -32,17 +32,18 @@ router.get("/getProjects", async(req, res) =>{
 
 // New route to get projects assigned to the user
 router.get("/getUserProjects", async (req, res) => {
-    const token = req.cookies.token; // Get the token from the cookie
+   
+    const token = req.headers.token;
+    
     if (!token) {
         return res.status(401).json({ message: "No token provided" });
     }
 
     try {
-        // console.log("Received token:", token);
         const decoded = decodeToken(token); // Decode the token to get user info
-        // console.log("decoded: ", decoded);
+        
         const userId = decoded._id; // Extract the user ID from the decoded token
-        // console.log("userId: ", userId);
+        
         const projects = await Projects.find({ assigned_to: userId }); // Find projects assigned to this user
 
         return res.status(200).json({ projects }); // Return the found projects

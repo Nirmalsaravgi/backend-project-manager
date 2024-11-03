@@ -15,7 +15,7 @@ const PORT = 8000;
 const corsOptions = {
     origin: "http://127.0.0.1:4200", // Allow requests from this specific origin
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["content-type", "Authorization"],
+    // allowedHeaders: ["content-type", "Authorization"],
     credentials: true, // Allow cookies to be sent
   };
 
